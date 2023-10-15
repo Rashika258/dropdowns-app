@@ -5,46 +5,46 @@ import Select from "react-select";
 import { cloneDeep, uniqueId } from "lodash";
 
 function App() {
-  let callhuboptions = [
+  let customDropDownoptions = [
     {
       id: 1,
-      label: "callhub_Name",
-      value: "callhub_Name",
+      label: "customDropDown_Name",
+      value: "customDropDown_Name",
     },
     {
       id: 2,
-      label: "callhub_Country_Id",
-      value: "callhub_Country_Id",
+      label: "customDropDown_Country_Id",
+      value: "customDropDown_Country_Id",
     },
     {
       id: 3,
-      label: "callhub_City",
-      value: "callhub_City",
+      label: "customDropDown_City",
+      value: "customDropDown_City",
     },
     {
       id: 4,
-      label: "callhub_Province",
-      value: "callhub_Province",
+      label: "customDropDown_Province",
+      value: "customDropDown_Province",
     },
     {
       id: 5,
-      label: "callhub_AccountId",
-      value: "callhub_AccountId",
+      label: "customDropDown_AccountId",
+      value: "customDropDown_AccountId",
     },
     {
       id: 6,
-      label: "callhub_AccountName",
-      value: "callhub_AccountName",
+      label: "customDropDown_AccountName",
+      value: "customDropDown_AccountName",
     },
     {
       id: 7,
-      label: "callhub_PhoneNum",
-      value: "callhub_PhoneNum",
+      label: "customDropDown_PhoneNum",
+      value: "customDropDown_PhoneNum",
     },
     {
       id: 8,
-      label: "callhub_CustomerName",
-      value: "callhub_CustomerName",
+      label: "customDropDown_CustomerName",
+      value: "customDropDown_CustomerName",
     },
 
 
@@ -97,9 +97,9 @@ function App() {
     {
       id: 1,
       salesforceValue: "",
-      callhubValue: "",
+      customDropDownValue: "",
       salesforceoptions:salesforceoptions,
-      callhuboptions: callhuboptions
+      customDropDownoptions: customDropDownoptions
     },
   ]);
 
@@ -111,15 +111,15 @@ function App() {
     const selectedSalesforceValues = addMoreValue.map(
       (dropdown) => dropdown.salesforceValue.value
     );
-    const selectedCallhubValues = addMoreValue.map(
-      (dropdown) => dropdown.callhubValue.value
+    const selectedcustomDropDownValues = addMoreValue.map(
+      (dropdown) => dropdown.customDropDownValue.value
     );
 
     const newSalesforceOptions = salesforceoptions.filter(
       (option) => !selectedSalesforceValues.includes(option.value)
     );
-    const newCallhubOptions = callhuboptions.filter(
-      (option) => !selectedCallhubValues.includes(option.value)
+    const newcustomDropDownOptions = customDropDownoptions.filter(
+      (option) => !selectedcustomDropDownValues.includes(option.value)
     );
 
     setaddMoreValue([
@@ -127,9 +127,9 @@ function App() {
       {
         id: newDropdownId,
         salesforceValue: "",
-        callhubValue: "",
+        customDropDownValue: "",
         salesforceoptions: newSalesforceOptions,
-        callhuboptions: newCallhubOptions,
+        customDropDownoptions: newcustomDropDownOptions,
       },
     ]);
   };
@@ -149,18 +149,18 @@ function App() {
           dropdown["salesforceoptions"] = newSalesforceOptions;
         }
       });
-    } else if (key === "callhubValue") {
-      const selectedCallhubValues = dropdownValue.map(
-        (dropdown) => dropdown.callhubValue.value
+    } else if (key === "customDropDownValue") {
+      const selectedcustomDropDownValues = dropdownValue.map(
+        (dropdown) => dropdown.customDropDownValue.value
       );
 
-      const newCallhubOptions = callhuboptions.filter(
-        (option) => !selectedCallhubValues.includes(option.value)
+      const newcustomDropDownOptions = customDropDownoptions.filter(
+        (option) => !selectedcustomDropDownValues.includes(option.value)
       );
 
       dropdownValue.map((dropdown) => {
         if (dropdown?.id === dropdowns?.id) {
-          dropdown["callhuboptions"] = newCallhubOptions;
+          dropdown["customDropDownoptions"] = newcustomDropDownOptions;
         }
       });
     }
@@ -192,13 +192,13 @@ function App() {
     let result = "";
     if (
       dropdownValue?.length === 1 &&
-      !dropdownValue?.[0]?.callhubValue &&
+      !dropdownValue?.[0]?.customDropDownValue &&
       !dropdownValue?.[0]?.salesforceValue
     ) {
       return;
     } else {
       dropdownValue.map((dropdown) => {
-        delete dropdown["callhuboptions"];
+        delete dropdown["customDropDownoptions"];
         delete dropdown["salesforceoptions"];
       });
       result = dropdownValue;
@@ -237,11 +237,11 @@ function App() {
                 <div className="right__wrap">
                   <Select
                     key={"c" + dropdown.id}
-                    options={dropdown.callhuboptions}
-                    value={dropdown.callhubValue}
-                    onChange={(val) => onChange(val, "callhubValue", dropdown)}
+                    options={dropdown.customDropDownoptions}
+                    value={dropdown.customDropDownValue}
+                    onChange={(val) => onChange(val, "customDropDownValue", dropdown)}
                     onFocus={(val) =>
-                      onFocusHandle(val, "callhubValue", dropdown)
+                      onFocusHandle(val, "customDropDownValue", dropdown)
                     }
                   />
                 </div>
@@ -271,7 +271,7 @@ function App() {
             salesforce
           </div>
           <div className="result_wrap-right">
-            Callhub
+            customDropDown
           </div>
             </div>
             {result.map((selectedOption) => {
@@ -281,7 +281,7 @@ function App() {
                     {selectedOption.salesforceValue.label}
                   </div>
                   <div className="result_wrap-right">
-                    {selectedOption.callhubValue.label}
+                    {selectedOption.customDropDownValue.label}
                   </div>
                 </div>
               );
